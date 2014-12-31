@@ -1,0 +1,62 @@
+<!-- Input for people -->
+<form class="form-horizontal">
+  <div class="form-group">
+    <label for="people" class="col-md-2 col-xs-2 control-label" >People Involved: </label>
+    <div class="col-md-10 col-xs-10" >
+      <tags-input  display-property="name" data-ng-model="people" min-length="1" on-tag-added="updateCheckbox()" on-tag-removed="updateCheckbox()"></tags-input>
+    </div>
+  </div>
+</form>
+<hr>
+
+
+<form class="row">
+  <div class="col-md-4 col-xs-4">
+    <div class="input-group">
+      <div class="input-group-addon">$</div>
+      <input type="text" class="form-control"  id="total-amount" placeholder="Total Amount" data-ng-model="totalAmount">
+    </div>
+  </div>
+</form>
+
+<hr>
+
+<!-- Bill Calculator -->
+<form class="form-horizontal">
+	<div class="form-group " >
+			<label class="text-center col-md-4 col-xs-4">Item Name</label>
+			<label class="text-center col-md-3 col-xs-3">Amount</label>
+			<label class="text-center col-md-5 col-xs-5">
+				<div class="col-md-2 col-xs-2" data-ng-repeat="person in people | orderBy:person">
+					{{ person.name }}
+				</div>
+
+			</label>
+	</div>
+	<div class="form-group" ng-repeat="item in items" >
+
+		<div class="col-md-4 col-xs-4">
+			<input type="text" class="form-control " placeholder="Item Name" data-ng-model="item.name" data-ng-change="updateItems($index)">
+		</div>
+		<div class="col-md-3 col-xs-3">
+			<input type="number" min="0" class="form-control " placeholder="amount" data-ng-model="item.amount" data-ng-change="updateItems($index)">
+		</div>
+		<div class="col-md-5 col-xs-5" >
+			<div class="col-md-2 col-xs-2" data-ng-repeat="person in item.people | orderBy:'name' ">
+				<input type="checkbox" class="form-control btn btn-default" data-ng-change="checkout()" data-ng-model="person.check" value="{{ person }}">
+			</div>
+		</div>
+	</div>
+</form>
+
+<hr>
+<div class="row">
+	<div class="col-md-3 col-xs-3 col-md-offset-4 col-xs-offset-4 text-right">
+		<a href='#/' class="btn btn-default " data-ng-click="checkout()" ><b>Total:</b></a>
+	</div>
+	<div class="col-md-5 col-xs-5 " >
+		<div class="col-md-2 col-xs-2" data-ng-repeat="person in result | orderBy:name">
+			{{ person.amount | number: 2}}
+		</div>
+	</div>
+</div>
