@@ -3,7 +3,7 @@
   <div class="form-group">
     <label for="people" class="col-md-2 col-xs-2 control-label" >People Involved: </label>
     <div class="col-md-10 col-xs-10" >
-      <tags-input  display-property="name" data-ng-model="people" min-length="1" on-tag-added="updateCheckbox()" on-tag-removed="updateCheckbox()"></tags-input>
+      <tags-input  display-property="name" max-tags="5" data-ng-model="people" min-length="1" on-tag-added="updateCheckbox()" on-tag-removed="updateCheckbox()"></tags-input>
     </div>
   </div>
 </form>
@@ -27,7 +27,7 @@
 			<label class="text-center col-md-4 col-xs-4">Item Name</label>
 			<label class="text-center col-md-3 col-xs-3">Amount</label>
 			<label class="text-center col-md-5 col-xs-5">
-				<div class="col-md-2 col-xs-2" data-ng-repeat="person in people | orderBy:person">
+				<div class="col-md-2 col-xs-2" data-ng-repeat="person in people | orderBy: 'name'">
 					{{ person.name }}
 				</div>
 
